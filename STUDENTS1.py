@@ -1,41 +1,33 @@
 import mysql.connector
-mydb= mysql.connector(host="127.0.0.1", user="root", passwd="2zkNKcz&EOZaRjc$",database="library_management_project")
+mydb=mysql.connector.connect(host="localhost",user="root",passwd="5678",database="library_management_project")
 mycursor=mydb.cursor()
 def useradd():
     studIDp=int(input("ENTER YOUR STUDENT_ID:- "))
-    #todo query to add this expression into the database
     stfnamep=input("ENTER YOUR FIRST NAME:- ")
-    #todo query to add this expression into the database
     stlnamep=input("ENTER YOUR LAST NAME:- ")
-    #todo query to add this expression into the database
     stcoursep=input("ENTER YOUR COURSE:- ")
-    #todo query to add this expression into the database
     styearp=int(input("ENTER YOUR ADMISSION YEAR:- "))
-    #todo query to add this expression into the database
     stcontactp=int(input("ENTER YOUR CONTACT NUMBER:- "))
-    #todo query to add this expression into the database
     stagep=int(input("ENTER YOUR AGE:- "))
-    #todo query to add this expression into the database
     stbirthdatep=int(input("ENTER YOUR DATE OF BIRTH(MMDDYYYY):- "))
-    #todo query to add this expression into the database
     stgenderp=input("ENTER YOUR GENDER:- ")
-    #todo query to add this expression into the database
+    sql = "INSERT INTO students (stud_ID, stfname, stlname, stcourse, styear, stcontact, stage, stbirthdate, stgender) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    val = (studIDp, stfnamep, stlnamep, stcoursep, styearp, stcontactp, stagep, stbirthdatep, stgenderp)
+    mycursor.execute(sql, val)
+    mydb.commit()
+    print(mycursor.rowcount, "was inserted.")
 def userupdate():
     studIDp=int(input("ENTER YOUR STUDENT_ID:- "))
-    #todo query to update this expression into the database
     stfnamep=input("ENTER YOUR FIRST NAME:- ")
-    #todo query to update this expression into the database
     stlnamep=input("ENTER YOUR LAST NAME:- ")
-    #todo query to update this expression into the database
     stcoursep=input("ENTER YOUR COURSE:- ")
-    #todo query to update this expression into the database
     styearp=int(input("ENTER YOUR ADMISSION YEAR:- "))
-    #todo query to update this expression into the database
     stcontactp=int(input("ENTER YOUR CONTACT NUMBER:- "))
-    #todo query to update this expression into the database
     stagep=int(input("ENTER YOUR AGE:- "))
-    #todo query to update this expression into the database
     stbirthdatep=int(input("ENTER YOUR DATE OF BIRTH(MMDDYYYY):- "))
-    #todo query to update this expression into the database
     stgenderp=input("ENTER YOUR GENDER:- ")
-    #todo query to update this expression into the database
+    sql = "UPDATE STUDENTS SET stud_ID = %s, stfname = %s, stlname = %s, stcourse = %s, styear = %s, stcontact = %s, stage = %s, stbirthdate = %s, stgender = %s WHERE stud_ID = studID"
+    val = (studIDp, stfnamep, stlnamep, stcoursep, styearp, stcontactp, stagep, stbirthdatep, stgenderp)
+    mycursor.execute(sql,val)
+    mydb.commit()
+    print(mycursor.rowcount, "records updated")

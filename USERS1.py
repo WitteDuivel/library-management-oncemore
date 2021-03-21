@@ -1,36 +1,31 @@
 import mysql.connector
-mydb= mysql.connector(host="127.0.0.1", user="root", passwd="2zkNKcz&EOZaRjc$",database="library_management_project")
+mydb=mysql.connector.connect(host="localhost",user="root",passwd="5678",database="library_management_project")
+mycursor=mydb.cursor()
 def useradd():
     staffIDp=int(input("ENTER YOUR STAFF_ID:- "))
-    #todo query to add this expression into the database
     stffnamep=input("ENTER YOUR FIRST NAME:- ")
-    #todo query to add this expression into the database
     stflnamep=input("ENTER YOUR LAST NAME")
-    #todo query to add this expression into the database
     stfcontactnumberp=int(input("ENTER YOUR CONTACT NUMBER:- "))
-    #todo query to add this expression into the database
     stfemailp=input("ENTER YOUR EMAIL_ID:- ")
-    #todo query to add this expression into the database
     stfaddressp=input("ENTER YOUR ADDRESS:- ")
-    #todo query to add this expression into the database
     stfpasswordp=input("ENTER YOUR PASSWORD:- ")
-    #todo query to add this expression into the database
     stftypep=input("ENTER YOUR STAFF TYPE:- ")
-    #todo query to add this expression into the database
+    sql = "INSERT INTO USERS (staff_ID, stffname, stflname, stfcontactnumber, stfemail, stfaddress, stfpassword, stftype) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+    val = (staffIDp, stffnamep, stflnamep, stfcontactnumberp, stfemailp, stfaddressp, stfpasswordp, stftypep)
+    mycursor.execute(sql, val)
+    mydb.commit()
+    print(mycursor.rowcount, "was inserted.")
 def userupdate():
     staffIDp=int(input("ENTER YOUR STAFF_ID:- "))
-    #todo query to update this expression into the database
     stffnamep=input("ENTER YOUR FIRST NAME:- ")
-    #todo query to update this expression into the database
-    stflnamep=input("ENTER YOUR LAST NAME")
-    #todo query to update this expression into the database
+    stflnamep=input("ENTER YOUR LAST NAME:- ")
     stfcontactnumberp=int(input("ENTER YOUR CONTACT NUMBER:- "))
-    #todo query to update this expression into the database
     stfemailp=input("ENTER YOUR EMAIL_ID:- ")
-    #todo query to update this expression into the database
     stfaddressp=input("ENTER YOUR ADDRESS:- ")
-    #todo query to update this expression into the database
     stfpasswordp=input("ENTER YOUR PASSWORD:- ")
-    #todo query to update this expression into the database
     stftypep=input("ENTER YOUR STAFF TYPE:- ")
-    #todo query to update this expression into the database
+    sql = "UPDATE USERS SET staff_ID = %s, stffname = %s, stflname = %s, stfcontactnumber = %s, stfemail = %s, stfaddress = %s, stfpassword = %s, stftype = %s WHERE staff_ID = staffID"
+    val = (staffIDp, stffnamep, stflnamep, stfcontactnumberp, stfemailp, stfaddressp, stfpasswordp, stftypep)
+    mycursor.execute(sql,val)
+    mydb.commit()
+    print(mycursor.rowcount, "records updated")
